@@ -27,11 +27,11 @@ while not gamecrashed:
 		if event.type==pygame.KEYDOWN:
 			if event.key==pygame.K_LEFT:
 				lead_xc=-10
-			if event.key==pygame.K_RIGHT:
+			elif event.key==pygame.K_RIGHT:
 				lead_xc=10
-			if event.key==pygame.K_UP:
+			elif event.key==pygame.K_UP:
 				lead_yc=-10
-			if event.key==pygame.K_DOWN:
+			elif event.key==pygame.K_DOWN:
 				lead_yc=10
 		if event.type==pygame.KEYUP:
 			if event.key==pygame.K_LEFT or event.key==pygame.K_RIGHT or event.key==pygame.K_UP or event.key==pygame.K_DOWN:
