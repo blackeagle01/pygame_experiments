@@ -6,16 +6,17 @@ pygame.init()
 black=(0,0,0)
 white=(255,255,255)
 red=(255,0,0)
-
+green=(0,255,0)
 
 gamecrash=False
 display_dim=(800,600)
 screen=pygame.display.set_mode(display_dim)
-fps=30
+fps=60
 
 
+prob_apple=10
 
-
+font=pygame.font.SysFont(None,35)
 
 class Snake:
 	def __init__(self,x,y,width,height):
@@ -31,8 +32,8 @@ class Apple:
 		self.x=dim[0]
 		self.y=dim[1]
 
-		self.width=7
-		self.height=7
+		self.width=10
+		self.height=10
 
 
 
@@ -41,12 +42,12 @@ snake=Snake(300,300,20,20)
 change_x=0
 change_y=0
 
-
+score=0
 
 clock=pygame.time.Clock()
 
-apple_x=random.randint(0,700)
-apple_y=random.randint(0,500)
+apple_x=random.randrange(0,700,10)
+apple_y=random.randrange(0,500,10)
 
 
 apple=Apple((apple_x,apple_y))
@@ -95,14 +96,25 @@ while not gamecrash:
 
 	
 
-	if abs(snake.x-apple.x)<=7 and abs(snake.y-apple.y)<=7:
+	if abs(snake.x-apple.x)<=10 and abs(snake.y-apple.y)<=10:
 		pygame.draw.rect(screen,black,[apple.x,apple.y,apple.width,apple.height])
-		apple.x=random.randint(0,700)
-		apple.y=random.randint(0,500)
+		apple.x=random.randrange(0,700,10)
+		apple.y=random.randrange(0,500,10)
+		score+=1
+		
 
-	pygame.draw.rect(screen,red,[apple.x,apple.y,apple.width,apple.height])
+
+	if random.randrange(0,100)<prob_apple:
+		pygame.draw.rect(screen,red,[apple.x,apple.y,apple.width,apple.height])
+
+	screen.fill(black,[600,10,300,100])
+
+	text="Score = {}".format(score)
+
+	out=font.render(text,True,green)
 
 	pygame.draw.rect(screen,black,[prev_x,prev_y,snake.width,snake.height])
+	screen.blit(out,(600,10))
 
 
 
